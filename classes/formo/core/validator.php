@@ -420,9 +420,11 @@ abstract class Formo_Core_Validator extends Formo_Container {
 	public static function range($field, $form)
 	{
 		$value = $form->$field->val();
-		$max = $form->$field->attr('max');
-		$min = $form->$field->attr('min');
-		$step = $form->$field->attr('step');
+		$attr = $form->$field->get('attr');
+
+		$max = Arr::get($attr, 'max');
+		$min = Arr::get($attr, 'min');
+		$step = Arr::get($attr, 'step');
 
 		if ($min AND $value <= $min)
 			return FALSE;
